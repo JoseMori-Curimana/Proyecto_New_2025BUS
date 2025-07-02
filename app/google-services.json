@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "406128082",
+    "project_id": "rutasunu2025",
+    "storage_bucket": "rutasunu2025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406128082:android:069e92b75ab550a77ef40b",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_new_2025bus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdN7KZnNSA38rzwfl7cGZknmeIvHDiRi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
