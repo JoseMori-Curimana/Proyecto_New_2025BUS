@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Spinner
+        android:id="@+id/spinnerRuta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- ⚠️ ESTE SPINNER DEBE EXISTIR SI USAS spinnerViaje EN TU CÓDIGO JAVA -->
+    <Spinner
+        android:id="@+id/spinnerViaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/tvEstado"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Esperando ubicación..." />
+
+    <fragment
+        android:id="@+id/mapEstudiante"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

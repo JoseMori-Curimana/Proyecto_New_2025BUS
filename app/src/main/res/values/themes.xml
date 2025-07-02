@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Proyecto_New_2025BUS" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Rutas" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Proyecto_New_2025BUS" parent="Base.Theme.Proyecto_New_2025BUS" />
+    <style name="Theme.Rutas" parent="Base.Theme.Rutas" />
 </resources>
