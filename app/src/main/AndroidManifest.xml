@@ -26,6 +26,9 @@
         <!-- LoginActivity que vendrá después del Splash -->
         <activity android:name=".LoginActivity" />
 
+        <!-- HomeActivity luego del login exitoso -->
+        <activity android:name=".HomeActivity" />
+
         <!-- Puedes usar MainActivity más adelante si lo necesitas -->
         <activity android:name=".MainActivity" />
 
