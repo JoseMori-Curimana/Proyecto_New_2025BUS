@@ -1,19 +1,34 @@
 # Proyecto_New_2025BUS 🚍
 
-Este es un proyecto Android en desarrollo para estudiantes de la Universidad Nacional de Ucayali (UNU), donde podrán visualizar la ubicación del bus universitario y sus rutas definidas.
+---
 
-## Rama `login` 🔐
+## 📌 Rama activa: `login`
 
-Esta rama contiene el módulo de **autenticación del estudiante**, donde se implementa:
+Esta rama implementa el módulo de **autenticación de estudiantes**, con las siguientes funcionalidades:
 
 - Inicio de sesión con **Firebase Authentication**
-- Validación del código de estudiante (8 dígitos)
-- Contraseña de 4 dígitos
-- Integración con Firebase y arquitectura Java
+- Validación del **código de estudiante** (sin necesidad de ingresar el correo completo)
+- Autenticación mediante correo generado automáticamente (`{codigo}@unu.edu.pe`)
+- Interfaz amigable centrada en el estudiante
+- Redirección a pantalla de bienvenida (`HomeActivity`) tras login exitoso
 
-## Tecnologías
+---
 
-- Android Studio
-- Java (UI y lógica)
+## 🔧 Tecnologías y herramientas utilizadas
+
+- Android Studio Giraffe / Hedgehog
+- Java (100%)
 - Firebase Authentication
-- Gradle Kotlin DSL
+- Firebase Console
+- Gradle Kotlin DSL (`build.gradle.kts`)
+- Vector Drawables + Imágenes JPG/PNG
+
+---
+
+## 🚀 Configuración previa antes de compilar
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/JoseMori-Curimana/Proyecto_New_2025BUS.git
+cd Proyecto_New_2025BUS
