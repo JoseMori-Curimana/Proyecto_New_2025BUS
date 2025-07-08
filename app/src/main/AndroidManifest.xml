@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permisos necesarios para ubicación -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,17 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Rutas"
+        android:theme="@style/Theme.Proyecto_New_2025BUS"
         tools:targetApi="31">
 
-        <!-- API Key de Google Maps -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDbpt9tnCWpVVak-eQ8IK61itlYfxv8szs" />
-
-        <!-- Actividad principal: selección de rol -->
+        <!-- SplashActivity será el punto de entrada -->
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,15 +23,15 @@
             </intent-filter>
         </activity>
 
-        <!-- Vista de estudiante -->
-        <activity
-            android:name=".estudiante"
-            android:exported="false" />
+        <!-- LoginActivity que vendrá después del Splash -->
+        <activity android:name=".LoginActivity" />
 
-        <!-- Vista del chofer -->
-        <activity
-            android:name=".chofer"
-            android:exported="false" />
+        <!-- HomeActivity luego del login exitoso -->
+        <activity android:name=".HomeActivity" />
+
+        <!-- Puedes usar MainActivity más adelante si lo necesitas -->
+        <activity android:name=".MainActivity" />
+
     </application>
 
 </manifest>

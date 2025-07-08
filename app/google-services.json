@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "269872619922",
-    "project_id": "chofer-17ebe",
-    "storage_bucket": "chofer-17ebe.firebasestorage.app"
+    "project_number": "406128082",
+    "project_id": "rutasunu2025",
+    "storage_bucket": "rutasunu2025.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:269872619922:android:d0aff20481a4e7fb1ee14b",
+        "mobilesdk_app_id": "1:406128082:android:069e92b75ab550a77ef40b",
         "android_client_info": {
-          "package_name": "com.example.rutas"
+          "package_name": "com.example.proyecto_new_2025bus"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAmCVMd38cFvh7gR1oboWSQ_3br1E51zjQ"
+          "current_key": "AIzaSyDdN7KZnNSA38rzwfl7cGZknmeIvHDiRi4"
         }
       ],
       "services": {
