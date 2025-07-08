@@ -1,13 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.services)
 }
 
 android {
-    namespace = "com.example.proyecto_new_2025bus"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.proyecto_new_2025bus"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -29,15 +28,33 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-database")
 
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    // Google Maps
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+
+
+// Firebase Realtime Database
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-analytics")
+
+    apply(plugin = "com.google.gms.google-services")
+
+
 }
