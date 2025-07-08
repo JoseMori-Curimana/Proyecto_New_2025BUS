@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Proyecto_New_2025BUS"
+rootProject.name = "rutas"
 include(":app")
  
