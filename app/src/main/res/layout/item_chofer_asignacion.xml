@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Nombre -->
+        <TextView
+            android:id="@+id/tvNombreChofer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del chofer"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- DNI -->
+        <TextView
+            android:id="@+id/tvDniChofer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DNI: 12345678"
+            android:textSize="14sp" />
+
+        <!-- Teléfono -->
+        <TextView
+            android:id="@+id/tvTelefonoChofer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teléfono: 999999999"
+            android:textSize="14sp" />
+
+        <!-- Botón -->
+        <Button
+            android:id="@+id/btnAsignarRuta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asignar Ruta"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="end" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

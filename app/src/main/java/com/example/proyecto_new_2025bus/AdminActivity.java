@@ -40,8 +40,9 @@ public class AdminActivity extends AppCompatActivity {
         });
 
         // Ir a asignar ruta (temporal: RutaVaciaActivity)
+        btnAsignarRuta = findViewById(R.id.btnAsignarRuta);
         btnAsignarRuta.setOnClickListener(v -> {
-            Intent intent = new Intent(AdminActivity.this, RutaVaciaActivity.class); // luego lo cambias por AsignarRutaActivity
+            Intent intent = new Intent(AdminActivity.this, ListaChoferesActivity.class);
             startActivity(intent);
         });
     }

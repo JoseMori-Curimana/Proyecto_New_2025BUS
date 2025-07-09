@@ -10,6 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 
+        <!-- Pantalla de inicio (Splash) -->
         <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -20,21 +21,29 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LoginActivity"
+        <!-- Login -->
+        <activity
+            android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true"/>
+            android:exported="true" />
 
-        <activity android:name=".AdminActivity"
+        <!-- Panel del administrador -->
+        <activity
+            android:name=".AdminActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:exported="true"/>
+            android:exported="true" />
 
-        <activity android:name=".RegistrarChoferActivity"
+        <!-- Registro de chofer -->
+        <activity
+            android:name=".RegistrarChoferActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:exported="true"/>
+            android:exported="true" />
 
-        <activity android:name=".RutaVaciaActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true"/>
+        <!-- Nueva actividad con lista de choferes y asignación visual -->
+        <activity
+            android:name=".ListaChoferesActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:exported="true" />
 
     </application>
 

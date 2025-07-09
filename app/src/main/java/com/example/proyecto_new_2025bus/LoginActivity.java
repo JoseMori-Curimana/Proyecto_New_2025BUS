@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                                 destino = AdminActivity.class;
                             } else {
                                 // Redirige a la nueva actividad vacía para cualquier otro rol
-                                destino = RutaVaciaActivity.class;
+                                destino = AsignarRutaActivity.class;
                             }
 
                             // Pasa el nombre del usuario al Intent
