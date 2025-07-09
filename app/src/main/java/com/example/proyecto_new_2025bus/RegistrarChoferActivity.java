@@ -57,29 +57,43 @@ public class RegistrarChoferActivity extends AppCompatActivity {
                 return;
             }
 
-            // Crear chofer como mapa
-            Map<String, Object> chofer = new HashMap<>();
-            chofer.put("nombre", nombre);
-            chofer.put("username", username);
-            chofer.put("password", password);
-            chofer.put("dni", dni);
-            chofer.put("telefono", telefono);
-            chofer.put("correo", correo);
-            chofer.put("licencia", licencia);
-            chofer.put("genero", genero);
-            chofer.put("rol", "chofer");
-            chofer.put("bus_asignado", null);
-
-            // Guardar en Firestore
+            // Validar que el username no exista
             db.collection("usuarios")
-                    .add(chofer)
-                    .addOnSuccessListener(documentReference -> {
-                        Toast.makeText(this, "Chofer registrado con éxito", Toast.LENGTH_SHORT).show();
-                        finish();
+                    .whereEqualTo("username", username)
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            Toast.makeText(this, "El nombre de usuario ya está registrado", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Crear chofer como mapa
+                            Map<String, Object> chofer = new HashMap<>();
+                            chofer.put("nombre", nombre);
+                            chofer.put("username", username);
+                            chofer.put("password", password);
+                            chofer.put("dni", dni);
+                            chofer.put("telefono", telefono);
+                            chofer.put("correo", correo);
+                            chofer.put("licencia", licencia);
+                            chofer.put("genero", genero);
+                            chofer.put("rol", "chofer");
+                            chofer.put("bus_asignado", null);
+
+                            // Guardar en Firestore
+                            db.collection("usuarios")
+                                    .add(chofer)
+                                    .addOnSuccessListener(documentReference -> {
+                                        Toast.makeText(this, "Chofer registrado con éxito", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(this, "Error al registrar el chofer", Toast.LENGTH_SHORT).show();
+                                    });
+                        }
                     })
                     .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Error al registrar el chofer", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error al verificar el nombre de usuario", Toast.LENGTH_SHORT).show();
                     });
         });
+
     }
 }
