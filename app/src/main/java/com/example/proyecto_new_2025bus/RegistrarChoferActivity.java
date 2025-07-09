@@ -57,6 +57,25 @@ public class RegistrarChoferActivity extends AppCompatActivity {
                 return;
             }
 
+            // Validar DNI (8 dígitos)
+            if (!dni.matches("\\d{8}")) {
+                Toast.makeText(this, "El DNI debe tener exactamente 8 dígitos", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Validar teléfono (9 dígitos)
+            if (!telefono.matches("\\d{9}")) {
+                Toast.makeText(this, "El teléfono debe tener exactamente 9 dígitos", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Validar correo electrónico (formato válido)
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
+                Toast.makeText(this, "Correo electrónico inválido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
             // Validar que el username no exista
             db.collection("usuarios")
                     .whereEqualTo("username", username)
