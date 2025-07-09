@@ -1,21 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.proyecto_new_2025bus">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Proyecto_New_2025BUS"
-        tools:targetApi="31">
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 
-        <!-- SplashActivity será el punto de entrada -->
         <activity
             android:name=".SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,14 +20,21 @@
             </intent-filter>
         </activity>
 
-        <!-- LoginActivity que vendrá después del Splash -->
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="true"/>
 
-        <!-- HomeActivity luego del login exitoso -->
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".AdminActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:exported="true"/>
 
-        <!-- Puedes usar MainActivity más adelante si lo necesitas -->
-        <activity android:name=".MainActivity" />
+        <activity android:name=".RegistrarChoferActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:exported="true"/>
+
+        <activity android:name=".RutaVaciaActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="true"/>
 
     </application>
 

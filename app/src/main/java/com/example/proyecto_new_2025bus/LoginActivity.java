@@ -9,33 +9,22 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText editTextCodigo, editTextPassword;
     Button btnLogin;
 
-    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Inicializar Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-
-        // Verificar si ya hay un usuario autenticado
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            // El usuario ya está autenticado, ir directamente a HomeActivity
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            finish(); // cerrar LoginActivity
-            return; // salir del método
-        }
-
         setContentView(R.layout.activity_login);
+
+        db = FirebaseFirestore.getInstance();
 
         editTextCodigo = findViewById(R.id.etCodigo);
         editTextPassword = findViewById(R.id.etPassword);
@@ -55,21 +44,37 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            String email = codigo + "@unu.edu.pe";
+            // Consultar Firestore
+            db.collection("usuarios")
+                    .whereEqualTo("codigo", codigo)
+                    .whereEqualTo("password", password)
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
+                            String rol = document.getString("rol");
 
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, "Bienvenido " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                            Class<?> destino;
 
-                            // Redirigir a HomeActivity
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            // Redirige a AdminActivity si el rol es admin
+                            if ("admin".equals(rol)) {
+                                destino = AdminActivity.class;
+                            } else {
+                                // Redirige a la nueva actividad vacía para cualquier otro rol
+                                destino = RutaVaciaActivity.class;
+                            }
+
+                            // Pasa el nombre del usuario al Intent
+                            Intent intent = new Intent(LoginActivity.this, destino);
+                            intent.putExtra("nombre_usuario", document.getString("nombre"));  // Pasa el nombre al Intent
                             startActivity(intent);
                             finish();
                         } else {
-                            Toast.makeText(LoginActivity.this, "Autenticación fallida: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Código o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                         }
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(LoginActivity.this, "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
                     });
         });
     }
