@@ -25,6 +25,14 @@ android {
             )
         }
     }
+
+    // ⚠️ Añade esta sección para Java 17
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    // (Opcional, para Kotlin)
 }
 
 dependencies {
@@ -42,6 +50,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.maps.android:android-maps-utils:2.3.0")
 
     // Test
     testImplementation("junit:junit:4.13.2")
