@@ -61,7 +61,7 @@ public class chofer extends AppCompatActivity implements OnMapReadyCallback {
         rutasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRuta.setAdapter(rutasAdapter);
 
-        ArrayAdapter<String> viajesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"1er viaje", "2do viaje", "3er viaje", "4to viaje"});
+        ArrayAdapter<String> viajesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"1er viaje 5:40am", "2do viaje 13:00H", "3er viaje 14:30H", "4to viaje 16:00H"});
         viajesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerViaje.setAdapter(viajesAdapter);
 

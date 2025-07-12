@@ -66,7 +66,7 @@ public class estudiante extends AppCompatActivity implements OnMapReadyCallback 
 
         ArrayAdapter<String> viajesAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item,
-                new String[]{"1er viaje", "2do viaje", "3er viaje", "4to viaje"});
+                new String[]{"1er viaje 5:40am", "2do viaje 13:00H", "3er viaje 14:30H", "4to viaje 16:00H"});
         viajesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerViaje.setAdapter(viajesAdapter);
 
@@ -128,20 +128,20 @@ public class estudiante extends AppCompatActivity implements OnMapReadyCallback 
     }
 
 
-    private void mostrarRutaEnMapa(GoogleMap googleMap, List<LatLng> ruta) {
-        if (ruta == null || ruta.isEmpty()) {
-            Log.e("DEBUG_RUTA", "Ruta vacía");
-            return;
-        }
-
-        PolylineOptions opciones = new PolylineOptions()
-                .addAll(ruta)
-                .color(Color.RED)       // 🔴 Cambia el color aquí (ej. RED, GREEN, YELLOW, etc.)
-                .width(25);             // 🔍 Cambia el grosor aquí (más alto = más grueso)
-
-        googleMap.addPolyline(opciones);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ruta.get(0), 15));
-    }
+//    private void mostrarRutaEnMapa(GoogleMap googleMap, List<LatLng> ruta) {
+//        if (ruta == null || ruta.isEmpty()) {
+//            Log.e("DEBUG_RUTA", "Ruta vacía");
+//            return;
+//        }
+//
+//        PolylineOptions opciones = new PolylineOptions()
+//                .addAll(ruta)
+//                .color(Color.RED)       // 🔴 Cambia el color aquí (ej. RED, GREEN, YELLOW, etc.)
+//                .width(25);             // 🔍 Cambia el grosor aquí (más alto = más grueso)
+//
+//        googleMap.addPolyline(opciones);
+//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ruta.get(0), 15));
+//    }
 
 
     private void cargarRutaDesdeKML(int rawResourceId) {
@@ -170,7 +170,7 @@ public class estudiante extends AppCompatActivity implements OnMapReadyCallback 
         String viajeKey = spinnerViaje.getSelectedItem().toString().toLowerCase().replace(" ", "_");
 
         refFirebase.child(rutaKey).child(viajeKey).addValueEventListener(new ValueEventListener() {
-            @Override
+                @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Boolean activo = snapshot.child("activo").getValue(Boolean.class);
@@ -246,14 +246,14 @@ public class estudiante extends AppCompatActivity implements OnMapReadyCallback 
                 });
     }
 
-    private double calcularDistanciaEnMetros(LatLng punto1, LatLng punto2) {
-        float[] results = new float[1];
-        Location.distanceBetween(
-                punto1.latitude, punto1.longitude,
-                punto2.latitude, punto2.longitude,
-                results);
-        return results[0]; // en metros
-    }
+//    private double calcularDistanciaEnMetros(LatLng punto1, LatLng punto2) {
+//        float[] results = new float[1];
+//        Location.distanceBetween(
+//                punto1.latitude, punto1.longitude,
+//                punto2.latitude, punto2.longitude,
+//                results);
+//        return results[0]; // en metros
+//    }
 
 
 }
