@@ -2,6 +2,7 @@ package com.example.proyecto_new_2025bus;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,14 @@ public class HomeChoferActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Mostrar el nombre del chofer si fue enviado desde LoginActivity
+        String nombre = getIntent().getStringExtra("nombre_usuario");
+        TextView tvBienvenida = findViewById(R.id.tvBienvenidaChofer);
+        if (nombre != null && !nombre.isEmpty()) {
+            tvBienvenida.setText("¡Bienvenido, " + nombre + "!");
+        }
+
         bottomNavigationView = findViewById(R.id.bottomNavigationChofer);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -44,7 +53,5 @@ public class HomeChoferActivity extends AppCompatActivity {
 
             return false;
         });
-
     }
-
 }

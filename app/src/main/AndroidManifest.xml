@@ -41,7 +41,7 @@
 
         <!-- Actividad Chofer con mapa y ubicación -->
         <activity android:name=".chofer" android:exported="false" />
-
+        <activity android:name=".estudiante" android:exported="false" />
         <!-- Actividad de asistencia -->
         <activity android:name=".AsistenciaActivity" android:exported="false" />
 

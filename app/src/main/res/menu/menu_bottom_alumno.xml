@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_rutas"
+        android:icon="@drawable/ic_bus"
+        android:title="Rutas" />
+    <item
+        android:id="@+id/nav_ubicacion"
+        android:icon="@drawable/ic_location"
+        android:title="ver bus" />
+    <item
+        android:id="@+id/nav_perfil_alumno"
+        android:icon="@drawable/ic_profile"
+        android:title="Perfil" />
+</menu>
