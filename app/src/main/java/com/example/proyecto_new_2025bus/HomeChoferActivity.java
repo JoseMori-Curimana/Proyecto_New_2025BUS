@@ -29,23 +29,22 @@ public class HomeChoferActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationChofer);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.nav_inicio:
-                    startActivity(new Intent(this, chofer.class));
-                    return true;
+            int id = item.getItemId();
 
-                case R.id.nav_asientos:
-                    startActivity(new Intent(this, AsistenciaActivity.class));
-                    return true;
-
-                case R.id.nav_perfil:
-                    startActivity(new Intent(this, HistorialActivity.class));
-                    return true;
-
-                default:
-                    return false;
+            if (id == R.id.nav_inicio) {
+                startActivity(new Intent(this, chofer.class));
+                return true;
+            } else if (id == R.id.nav_asientos) {
+                startActivity(new Intent(this, AsistenciaActivity.class));
+                return true;
+            } else if (id == R.id.nav_perfil) {
+                startActivity(new Intent(this, HistorialActivity.class));
+                return true;
             }
+
+            return false;
         });
+
     }
 
 }
