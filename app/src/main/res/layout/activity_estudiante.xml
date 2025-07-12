@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Estado con diseño visual decorativo -->
+    <TextView
+        android:id="@+id/tvEstado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Esperando ubicación del chofer..."
+        android:textSize="18sp"
+        android:textColor="#00796B"
+        android:padding="12dp"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:elevation="4dp"
+        android:outlineProvider="bounds"
+        android:clipToOutline="true"
+        android:backgroundTint="#E0F7FA"
+        android:backgroundTintMode="src_over"
+        style="@android:style/Widget.Material.TextView"/>
+
+    <!-- Spinner de ruta -->
+    <Spinner
+        android:id="@+id/spinnerRuta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Spinner de viaje -->
+    <Spinner
+        android:id="@+id/spinnerViaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
+    <!-- Fragmento del mapa -->
+    <fragment
+        android:id="@+id/mapEstudiante"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>
