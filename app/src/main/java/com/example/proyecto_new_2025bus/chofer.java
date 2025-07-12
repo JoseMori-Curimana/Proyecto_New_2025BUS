@@ -1,4 +1,4 @@
-package com.example.rutas;
+package com.example.proyecto_new_2025bus;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -95,7 +95,7 @@ public class chofer extends AppCompatActivity implements OnMapReadyCallback {
 
         LocationRequest request = new LocationRequest.Builder(
                 Priority.PRIORITY_HIGH_ACCURACY,
-                5000
+                5000 // cada 5 segundos
         ).setMinUpdateIntervalMillis(3000).build();
 
         locationCallback = new LocationCallback() {
@@ -107,10 +107,12 @@ public class chofer extends AppCompatActivity implements OnMapReadyCallback {
                     String viaje = spinnerViaje.getSelectedItem().toString().toLowerCase().replace(" ", "_");
                     DatabaseReference rutaRef = refFirebase.child(ruta).child(viaje);
 
-                    LatLng coordenadas = new LatLng(location.getLatitude(), location.getLongitude());
+                    double lat = location.getLatitude();
+                    double lng = location.getLongitude();
 
                     Map<String, Object> datos = new HashMap<>();
-                    datos.put("ubicacion", coordenadas);
+                    datos.put("lat", lat);
+                    datos.put("lng", lng);
                     datos.put("ultimo_update", ServerValue.TIMESTAMP);
                     datos.put("hora", obtenerHoraActual());
                     datos.put("activo", true);
@@ -119,6 +121,7 @@ public class chofer extends AppCompatActivity implements OnMapReadyCallback {
                     rutaRef.setValue(datos);
 
                     if (mMap != null) {
+                        LatLng coordenadas = new LatLng(lat, lng);
                         mMap.clear();
                         mMap.addMarker(new MarkerOptions().position(coordenadas).title("Tu posición"));
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 15));
@@ -147,7 +150,7 @@ public class chofer extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng pucallpa = new LatLng(-8.3791, -74.5539);
+        LatLng pucallpa = new LatLng(-8.3791, -74.5539); // Vista inicial
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pucallpa, 14));
     }
 

@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "406128082",
-    "project_id": "rutasunu2025",
-    "storage_bucket": "rutasunu2025.firebasestorage.app"
+    "project_number": "316191431539",
+    "project_id": "rutas-7771a",
+    "storage_bucket": "rutas-7771a.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:406128082:android:069e92b75ab550a77ef40b",
+        "mobilesdk_app_id": "1:316191431539:android:00a7ee0ac122c482870306",
         "android_client_info": {
           "package_name": "com.example.proyecto_new_2025bus"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDdN7KZnNSA38rzwfl7cGZknmeIvHDiRi4"
+          "current_key": "AIzaSyDi1LQ7GMfGnc1udPcxCA-cCdsAunzkW5I"
         }
       ],
       "services": {
