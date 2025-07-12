@@ -26,6 +26,7 @@ public class HomeChoferActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        bottomNavigationView = findViewById(R.id.bottomNavigationChofer);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -33,19 +34,18 @@ public class HomeChoferActivity extends AppCompatActivity {
                     startActivity(new Intent(this, chofer.class));
                     return true;
 
-        case R.id.nav_asientos:
-            startActivity(new Intent(this, AsistenciaActivity.class));
-            return true;
+                case R.id.nav_asientos:
+                    startActivity(new Intent(this, AsistenciaActivity.class));
+                    return true;
 
-        case R.id.nav_perfil:
-            startActivity(new Intent(this, HistorialActivity.class));
-            return true;
-
+                case R.id.nav_perfil:
+                    startActivity(new Intent(this, HistorialActivity.class));
+                    return true;
 
                 default:
                     return false;
             }
         });
-
     }
+
 }
