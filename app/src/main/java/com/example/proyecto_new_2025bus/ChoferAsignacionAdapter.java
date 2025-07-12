@@ -1,5 +1,7 @@
 package com.example.proyecto_new_2025bus;
 
+
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +24,7 @@ import java.util.Map;
 
 public class ChoferAsignacionAdapter extends RecyclerView.Adapter<ChoferAsignacionAdapter.ViewHolder> {
 
-    private final List<Chofer> choferList;
+    private final List<chofer> choferList;
     private final Context context;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -30,7 +32,7 @@ public class ChoferAsignacionAdapter extends RecyclerView.Adapter<ChoferAsignaci
     private final String[] turnos = {"Mañana", "Tarde", "Noche"};
     private final String[] dias = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
 
-    public ChoferAsignacionAdapter(List<Chofer> choferList, Context context) {
+    public ChoferAsignacionAdapter(List<chofer> choferList, Context context) {
         this.choferList = choferList;
         this.context = context;
     }
@@ -44,7 +46,7 @@ public class ChoferAsignacionAdapter extends RecyclerView.Adapter<ChoferAsignaci
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Chofer chofer = choferList.get(position);
+        chofer chofer = choferList.get(position);
 
         holder.tvNombre.setText("Nombre: " + chofer.getNombre());
         holder.tvDni.setText("DNI: " + chofer.getDni());

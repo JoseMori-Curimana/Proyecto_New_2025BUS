@@ -37,8 +37,10 @@ android {
 
 dependencies {
     // Core Android
+
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
@@ -48,9 +50,11 @@ dependencies {
 
     // Firebase Realtime Database
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-firestore:24.10.0")
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.maps.android:android-maps-utils:2.3.0")
+    implementation(libs.gridlayout)
 
     // Test
     testImplementation("junit:junit:4.13.2")

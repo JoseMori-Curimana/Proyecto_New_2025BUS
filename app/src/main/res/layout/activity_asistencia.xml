@@ -8,7 +8,7 @@
     android:padding="16dp"
     android:background="#F5F5F5">
 
-    <!-- Título -->
+    <!-- Título de la pantalla -->
     <TextView
         android:id="@+id/txtTituloAsistencia"
         android:layout_width="match_parent"
@@ -27,7 +27,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         app:columnCount="6"
-        app:rowCount="10"
+        app:rowCount="5"
         app:alignmentMode="alignMargins"
-        app:useDefaultMargins="true"/>
+        app:useDefaultMargins="true" />
+
 </LinearLayout>

@@ -18,7 +18,7 @@ public class ListaChoferesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerChoferes;
     private ChoferAsignacionAdapter adapter;
-    private final List<Chofer> listaChoferes = new ArrayList<>();
+    private final List<chofer> listaChoferes = new ArrayList<>();
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -46,7 +46,7 @@ public class ListaChoferesActivity extends AppCompatActivity {
                         String dni = doc.getString("dni");
                         String telefono = doc.getString("telefono");
 
-                        Chofer chofer = new Chofer(id, nombre, dni, telefono);
+                        chofer chofer = new chofer(id, nombre, dni, telefono);
                         listaChoferes.add(chofer);
                     }
                     adapter.notifyDataSetChanged();

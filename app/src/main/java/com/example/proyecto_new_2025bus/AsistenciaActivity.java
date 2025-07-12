@@ -26,10 +26,11 @@ public class AsistenciaActivity extends AppCompatActivity {
         int totalColumnas = 6;
         int contadorAsiento = 1;
 
+        outer:
         for (int fila = 0; fila < totalFilas; fila++) {
             for (int columna = 0; columna < totalColumnas; columna++) {
 
-                // Columnas 2 y 3 serán el pasillo (vacías)
+                // Columnas 2 y 3 son el pasillo vacío
                 if (columna == 2 || columna == 3) {
                     View espacio = new View(this);
                     GridLayout.LayoutParams espacioParams = new GridLayout.LayoutParams();
@@ -42,7 +43,10 @@ public class AsistenciaActivity extends AppCompatActivity {
                     continue;
                 }
 
-                // Crear asiento y colocarlo en la grilla
+                // Limita a 20 asientos
+                if (contadorAsiento > totalAsientos) break outer;
+
+                // Crear botón de asiento
                 View asiento = crearAsiento(contadorAsiento++);
                 GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                 params.width = 0;
@@ -58,23 +62,18 @@ public class AsistenciaActivity extends AppCompatActivity {
     private View crearAsiento(int numero) {
         Button btn = new Button(this);
         btn.setText("A" + numero);
-        btn.setBackgroundColor(Color.LTGRAY);
         btn.setTextColor(Color.BLACK);
         btn.setAllCaps(false);
-        btn.setBackgroundResource(R.drawable.bg_asiento);
-        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-        params.width = 0;
-        params.height = 160;
-        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1);
-        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-        btn.setLayoutParams(params);
+        btn.setBackgroundColor(Color.LTGRAY);  // Color inicial
 
+        // Si tienes un fondo personalizado en drawable, descomenta:
+        // btn.setBackgroundResource(R.drawable.bg_asiento);
+
+        // Evento al hacer clic en el asiento
         btn.setOnClickListener(v -> mostrarDialogo(btn));
 
         return btn;
     }
-
-
 
     private void mostrarDialogo(Button asiento) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -82,11 +81,11 @@ public class AsistenciaActivity extends AppCompatActivity {
         builder.setMessage("¿El estudiante asistió?");
 
         builder.setPositiveButton("Sí", (dialog, which) -> {
-            asiento.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#4CAF50"))); // verde
+            asiento.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#4CAF50"))); // Verde
         });
 
         builder.setNegativeButton("No", (dialog, which) -> {
-            asiento.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F44336"))); // rojo
+            asiento.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F44336"))); // Rojo
         });
 
         builder.setNeutralButton("Cancelar", (dialog, which) -> dialog.dismiss());
