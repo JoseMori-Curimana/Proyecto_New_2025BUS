@@ -55,6 +55,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.maps.android:android-maps-utils:2.3.0")
     implementation(libs.gridlayout)
+    implementation(libs.activity)
 
     // Test
     testImplementation("junit:junit:4.13.2")
