@@ -26,20 +26,17 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDbpt9tnCWpVVak-eQ8IK61itlYfxv8szs" /> <!-- Actividad principal: selección de rol -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity> <!-- Vista de estudiante -->
-        <activity
-            android:name=".estudiante"
-            android:exported="false" /> <!-- Vista del chofer -->
-        <activity
-            android:name=".chofer"
-            android:exported="false" />
+
     </application>
 
 </manifest>

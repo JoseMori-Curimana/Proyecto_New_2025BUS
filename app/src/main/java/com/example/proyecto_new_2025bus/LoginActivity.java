@@ -44,37 +44,37 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            // Consultar Firestore
             db.collection("usuarios")
                     .whereEqualTo("codigo", codigo)
                     .whereEqualTo("password", password)
                     .get()
-                    .addOnSuccessListener(queryDocumentSnapshots -> {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
+                    .addOnSuccessListener(querySnapshot -> {
+                        if (!querySnapshot.isEmpty()) {
+                            DocumentSnapshot document = querySnapshot.getDocuments().get(0);
                             String rol = document.getString("rol");
+                            String nombre = document.getString("nombre");
 
-                            Class<?> destino;
+                            Intent intent;
 
-                            // Redirige a AdminActivity si el rol es admin
-                            if ("admin".equals(rol)) {
-                                destino = AdminActivity.class;
+                            if ("chofer".equalsIgnoreCase(rol)) {
+                                intent = new Intent(this, HomeChoferActivity.class);
+                            } else if ("alumno".equalsIgnoreCase(rol)) {
+                                intent = new Intent(this, HomeAlumnoActivity.class);
                             } else {
-                                // Redirige a la nueva actividad vacía para cualquier otro rol
-                                destino = AsignarRutaActivity.class;
+                                Toast.makeText(this, "Usuario no existe o no autorizado", Toast.LENGTH_SHORT).show();
+                                return;
                             }
 
-                            // Pasa el nombre del usuario al Intent
-                            Intent intent = new Intent(LoginActivity.this, destino);
-                            intent.putExtra("nombre_usuario", document.getString("nombre"));  // Pasa el nombre al Intent
+                            intent.putExtra("nombre_usuario", nombre);
                             startActivity(intent);
                             finish();
+
                         } else {
-                            Toast.makeText(LoginActivity.this, "Código o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Código o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(e -> {
-                        Toast.makeText(LoginActivity.this, "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error al iniciar sesión: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         });
     }
