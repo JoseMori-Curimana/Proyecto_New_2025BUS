@@ -2,4 +2,7 @@
     <string name="app_name">Proyecto_New_2025BUS</string>
     <string name="bienvenida_texto">Bienvenido a la app Rutas de la UNU 2025</string>
 
+    <!-- Títulos y texto para 'Asignar Bus' -->
+    <string name="asignar_bus_titulo">Asignar Bus a Chofer</string>
+    <string name="asignar_bus_button">Asignar Bus</string>
 </resources>

@@ -14,9 +14,11 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash); // Cargar el layout con el mensaje
 
-        new Handler().postDelayed(() -> {
-            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-            finish();
+        // Uso de Handler con método postDelayed en el estilo moderno
+        new Handler(getMainLooper()).postDelayed(() -> {
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();  // Termina esta actividad para evitar que el usuario regrese a ella
         }, DURACION_SPLASH);
     }
 }
