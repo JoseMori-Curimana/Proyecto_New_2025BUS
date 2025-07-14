@@ -82,6 +82,9 @@ public class HomeAlumnoActivity extends AppCompatActivity {
             } else if (id == R.id.nav_perfil_alumno) {
 //                startActivity(new Intent(this, PerfilAlumnoActivity.class)); // actividad para perfil
                 return true;
+            } else if(id == R.id.nav_notificaciones){
+                startActivity(new Intent(this, Notificacion.class));
+                return true;
             }
 
             return false;

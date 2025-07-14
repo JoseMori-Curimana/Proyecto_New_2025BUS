@@ -1,86 +1,60 @@
 package com.example.proyecto_new_2025bus;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class Notificacion extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class Notificacion extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private List<NotificacionModel> listaNotificaciones = new ArrayList<>();
     private NotificacionAdapter adapter;
+    private List<NotificacionModel> listaNotificaciones = new ArrayList<>();
+    private FirebaseFirestore db;
 
-
-    public Notificacion() {
-        // Required empty public constructor
-    }
-    @Nullable
+    @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_notificacion, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_notificacion);
 
-        recyclerView = view.findViewById(R.id.recyclerNotificaciones);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView = findViewById(R.id.recyclerViewNotificaciones);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         adapter = new NotificacionAdapter(listaNotificaciones);
         recyclerView.setAdapter(adapter);
 
-        cargarNotificacionesDesdeFirestore();
+        db = FirebaseFirestore.getInstance();
 
-        return view;
+        cargarNotificaciones();
     }
-    private void cargarNotificacionesDesdeFirestore() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private void cargarNotificaciones() {
         db.collection("notificacion")
-                .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     listaNotificaciones.clear();
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                        String tipo = doc.getString("tipo");
-                        String mensaje = doc.getString("mensaje");
-                        listaNotificaciones.add(new NotificacionModel(tipo, mensaje));
+                        NotificacionModel noti = doc.toObject(NotificacionModel.class);
+                        listaNotificaciones.add(noti);
                     }
                     adapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al cargar notificaciones", Toast.LENGTH_SHORT).show();
                 });
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Notificacion.
-     */
-    // TODO: Rename and change types and number of parameters
-
-
-
-
 }

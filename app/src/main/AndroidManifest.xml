@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- Permisos necesarios para ubicación -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
@@ -19,37 +17,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rutas"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Notificacion"
+            android:exported="false" />
         <!-- Clave de API de Google Maps -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDbpt9tnCWpVVak-eQ8IK61itlYfxv8szs" />
-
-        <!-- Actividad principal: Login -->
+            android:value="AIzaSyDbpt9tnCWpVVak-eQ8IK61itlYfxv8szs" /> <!-- Actividad principal: Login -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Vista del alumno -->
-        <activity android:name=".HomeAlumnoActivity" android:exported="false" />
-
-        <!-- Vista del chofer (Home) -->
-        <activity android:name=".HomeChoferActivity" android:exported="false" />
-
-        <!-- Actividad Chofer con mapa y ubicación -->
-        <activity android:name=".chofer" android:exported="false" />
-        <activity android:name=".estudiante" android:exported="false" />
-        <!-- Actividad de asistencia -->
-        <activity android:name=".AsistenciaActivity" android:exported="false" />
-
-        <!-- Actividad de historial -->
-        <activity android:name=".HistorialActivity" android:exported="false" />
-
+        </activity> <!-- Vista del alumno -->
+        <activity
+            android:name=".HomeAlumnoActivity"
+            android:exported="false" /> <!-- Vista del chofer (Home) -->
+        <activity
+            android:name=".HomeChoferActivity"
+            android:exported="false" /> <!-- Actividad Chofer con mapa y ubicación -->
+        <activity
+            android:name=".chofer"
+            android:exported="false" />
+        <activity
+            android:name=".estudiante"
+            android:exported="false" /> <!-- Actividad de asistencia -->
+        <activity
+            android:name=".AsistenciaActivity"
+            android:exported="false" /> <!-- Actividad de historial -->
+        <activity
+            android:name=".HistorialActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
