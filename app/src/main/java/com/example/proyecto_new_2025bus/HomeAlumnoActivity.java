@@ -2,6 +2,7 @@ package com.example.proyecto_new_2025bus;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class HomeAlumnoActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationAlumno;
+    private String dniAlumno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,11 @@ public class HomeAlumnoActivity extends AppCompatActivity {
             return insets;
         });
 
+        dniAlumno = getIntent().getStringExtra("dni-usuario");
+        if (dniAlumno == null) {
+            dniAlumno = "";
+            Toast.makeText(this, "DNI no recibido", Toast.LENGTH_SHORT).show();
+        }
         bottomNavigationAlumno = findViewById(R.id.bottomNavigationAlumno);
 
         bottomNavigationAlumno.setOnItemSelectedListener(item -> {
@@ -38,7 +45,12 @@ public class HomeAlumnoActivity extends AppCompatActivity {
             } else if (id == R.id.nav_ubicacion) {
                 startActivity(new Intent(this, estudiante.class)); // actividad para ubicación
                 return true;
-            } else if (id == R.id.nav_perfil_alumno) {
+            } else if (id == R.id.nav_asientos) {
+                Intent intent = new Intent(this, AsistenciaAlumnoActivity.class);
+                intent.putExtra("dni-alumno", dniAlumno);
+                startActivity(intent);
+                return true;
+            }else if (id == R.id.nav_perfil_alumno) {
 //                startActivity(new Intent(this, PerfilAlumnoActivity.class)); // actividad para perfil
                 return true;
             }

@@ -11,48 +11,33 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        android:layout_marginBottom="56dp"> <!-- Espacio para el menú -->
+        android:layout_marginBottom="56dp"> <!-- espacio para el menú -->
 
+        <!-- Título -->
         <TextView
-            android:id="@+id/txtTituloHistorial"
+            android:id="@+id/txtTituloAsistencia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Historial de usuarios"
+            android:text="Confirmar asistencia"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#212121"
             android:gravity="center"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp" />
 
-        <Button
-            android:id="@+id/btnFecha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Seleccionar fecha" />
-
-        <Spinner
-            android:id="@+id/spinnerEstado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/txtFechaSeleccionada"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fecha: -"
-            android:layout_marginTop="8dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerHistorial"
+        <!-- Grilla de asientos -->
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/gridAsientos"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginTop="16dp" />
-
+            app:columnCount="6"
+            app:rowCount="5"
+            app:alignmentMode="alignMargins"
+            app:useDefaultMargins="true" />
     </LinearLayout>
 
-    <!-- Menú inferior fijo -->
+    <!-- Menú inferior -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationChofer"
         android:layout_width="match_parent"
@@ -63,4 +48,5 @@
         app:labelVisibilityMode="labeled"
         app:itemIconTint="@color/selector_bottom_nav"
         app:itemTextColor="@color/selector_bottom_nav" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

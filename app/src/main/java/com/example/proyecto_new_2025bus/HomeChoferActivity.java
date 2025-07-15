@@ -44,12 +44,15 @@ public class HomeChoferActivity extends AppCompatActivity {
                 startActivity(new Intent(this, chofer.class));
                 return true;
             } else if (id == R.id.nav_asientos) {
-                startActivity(new Intent(this, AsistenciaActivity.class));
+                startActivity(new Intent(this, AsistenciaChoferActivity.class));
                 return true;
-            } else if (id == R.id.nav_perfil) {
+            } else if (id == R.id.nav_historial) {
                 startActivity(new Intent(this, HistorialActivity.class));
                 return true;
+            } else if (id == R.id.nav_perfil) {
+                return true;
             }
+
 
             return false;
         });

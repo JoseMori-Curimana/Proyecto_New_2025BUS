@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                             DocumentSnapshot document = querySnapshot.getDocuments().get(0);
                             String rol = document.getString("rol");
                             String nombre = document.getString("nombre");
-
+                            String dni = document.getString("dni");
                             Intent intent;
 
                             if ("chofer".equalsIgnoreCase(rol)) {
@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             intent.putExtra("nombre_usuario", nombre);
+                            intent.putExtra("dni-usuario", dni);
                             startActivity(intent);
                             finish();
 

@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -38,9 +37,9 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         HistorialItem item = historialList.get(position);
-        holder.txtTitulo.setText(item.getTitulo());
-        holder.txtFecha.setText(item.getFecha());
-        holder.txtDetalle.setText(item.getDetalle());
+        holder.txtTitulo.setText(item.getNombre()); // o puedes mostrar item.getNombre() + " (" + item.getDni() + ")"
+        holder.txtFecha.setText("Fecha: " + item.getFecha());
+        holder.txtDetalle.setText("Estado: " + item.getEstado() + " | Asiento: " + item.getAsiento());
     }
 
     @Override
