@@ -102,13 +102,13 @@ public class HomeAlumnoActivity extends AppCompatActivity {
                 intent.putExtra("nombre-alumno", nombreAlumno);
                 startActivity(intent);
                 return true;
-            } else if (id == R.id.nav_perfil_alumno) {
+            } else if (id == R.id.nav_notificaciones) {
+                startActivity(new Intent(this, Notificacion.class));
+                return true;
+            }else if (id == R.id.nav_perfil_alumno) {
                 Intent intent = new Intent(this, PerfilAlumnoActivity.class);
                 intent.putExtra("codigo", codigo);
                 startActivity(intent);
-                return true;
-            } else if (id == R.id.nav_notificaciones) {
-                startActivity(new Intent(this, Notificacion.class));
                 return true;
             }
 

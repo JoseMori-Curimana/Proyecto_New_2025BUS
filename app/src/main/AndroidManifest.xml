@@ -58,7 +58,9 @@
         <activity
             android:name=".RegistrarChoferActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".Notificacion"
+            android:exported="false" />
     </application>
 
 </manifest>
