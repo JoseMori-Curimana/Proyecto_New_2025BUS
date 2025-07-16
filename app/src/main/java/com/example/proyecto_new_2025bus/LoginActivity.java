@@ -58,8 +58,10 @@ public class LoginActivity extends AppCompatActivity {
 
                             if ("chofer".equalsIgnoreCase(rol)) {
                                 intent = new Intent(this, HomeChoferActivity.class);
+                                intent.putExtra("codigo", codigo); //
                             } else if ("alumno".equalsIgnoreCase(rol)) {
                                 intent = new Intent(this, HomeAlumnoActivity.class);
+                                intent.putExtra("codigo", codigo);
                             } else {
                                 Toast.makeText(this, "Usuario no existe o no autorizado", Toast.LENGTH_SHORT).show();
                                 return;

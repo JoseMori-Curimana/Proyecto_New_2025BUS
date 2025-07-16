@@ -39,7 +39,7 @@ public class AsistenciaAlumnoActivity extends AppCompatActivity {
         gridLayout = findViewById(R.id.gridAsientos);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationAlumno);
         bottomNavigationView.setSelectedItemId(R.id.nav_asientos);
-
+        String codigo = getIntent().getStringExtra("codigo");
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
@@ -51,6 +51,9 @@ public class AsistenciaAlumnoActivity extends AppCompatActivity {
             } else if (id == R.id.nav_asientos) {
                 return true;
             }else if (id == R.id.nav_perfil_alumno) {
+                Intent intent = new Intent(this, PerfilAlumnoActivity.class);
+                intent.putExtra("codigo", codigo); //
+                startActivity(intent);
                 return true;
             }
             return false;

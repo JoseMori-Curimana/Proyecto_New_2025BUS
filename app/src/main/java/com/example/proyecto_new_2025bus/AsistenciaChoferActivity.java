@@ -33,7 +33,7 @@ public class AsistenciaChoferActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asistencia_chofer);
-
+        String codigo = getIntent().getStringExtra("codigo");
         db = FirebaseFirestore.getInstance();
         gridLayout = findViewById(R.id.gridAsientos);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationChofer);
@@ -50,6 +50,9 @@ public class AsistenciaChoferActivity extends AppCompatActivity {
                 startActivity(new Intent(this, HistorialActivity.class));
                 return true;
             } else if (id == R.id.nav_perfil) {
+                Intent intent = new Intent(this, perfil.class);
+                intent.putExtra("codigo", codigo); //
+                startActivity(intent);
                 return true;
             }
             return false;

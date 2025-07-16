@@ -72,7 +72,7 @@ public class HistorialActivity extends AppCompatActivity {
                 // Opcional: cuando no hay selección
             }
         });
-
+        String codigo = getIntent().getStringExtra("codigo");
         // Navegación inferior
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationChofer);
         bottomNavigationView.setSelectedItemId(R.id.nav_historial);
@@ -90,6 +90,9 @@ public class HistorialActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_perfil) {
+                Intent intent = new Intent(this, perfil.class);
+                intent.putExtra("codigo", codigo); //
+                startActivity(intent);
                 return true;
             }
 

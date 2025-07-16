@@ -32,6 +32,7 @@ public class HomeAlumnoActivity extends AppCompatActivity {
 
         dniAlumno = getIntent().getStringExtra("dni-usuario");
         nombreAlumno = getIntent().getStringExtra("nombre_usuario");
+        String codigo = getIntent().getStringExtra("codigo");
         if (dniAlumno == null) {
             dniAlumno = "";
             Toast.makeText(this, "DNI no recibido", Toast.LENGTH_SHORT).show();
@@ -42,10 +43,10 @@ public class HomeAlumnoActivity extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.nav_rutas) {
-//                startActivity(new Intent(this, VerRutasActivity.class)); // actividad para rutas
+//
                 return true;
             } else if (id == R.id.nav_ubicacion) {
-                startActivity(new Intent(this, estudiante.class)); // actividad para ubicación
+                startActivity(new Intent(this, estudiante.class));
                 return true;
             } else if (id == R.id.nav_asientos) {
                 Intent intent = new Intent(this, AsistenciaAlumnoActivity.class);
@@ -54,7 +55,9 @@ public class HomeAlumnoActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             }else if (id == R.id.nav_perfil_alumno) {
-//                startActivity(new Intent(this, PerfilAlumnoActivity.class)); // actividad para perfil
+                Intent intent = new Intent(this, PerfilAlumnoActivity.class);
+                intent.putExtra("codigo", codigo); //
+                startActivity(intent);
                 return true;
             }
 

@@ -27,14 +27,15 @@ public class HomeChoferActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         // Mostrar el nombre del chofer si fue enviado desde LoginActivity
         String nombre = getIntent().getStringExtra("nombre_usuario");
+
+
         TextView tvBienvenida = findViewById(R.id.tvBienvenidaChofer);
         if (nombre != null && !nombre.isEmpty()) {
             tvBienvenida.setText("¡Bienvenido, " + nombre + "!");
         }
-
+        String codigo = getIntent().getStringExtra("codigo");
         bottomNavigationView = findViewById(R.id.bottomNavigationChofer);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -43,16 +44,21 @@ public class HomeChoferActivity extends AppCompatActivity {
             if (id == R.id.nav_inicio) {
                 startActivity(new Intent(this, chofer.class));
                 return true;
+
             } else if (id == R.id.nav_asientos) {
                 startActivity(new Intent(this, AsistenciaChoferActivity.class));
                 return true;
+
             } else if (id == R.id.nav_historial) {
                 startActivity(new Intent(this, HistorialActivity.class));
                 return true;
+
             } else if (id == R.id.nav_perfil) {
+                Intent intent = new Intent(this, perfil.class);
+                intent.putExtra("codigo", codigo); //
+                startActivity(intent);
                 return true;
             }
-
 
             return false;
         });
