@@ -16,6 +16,7 @@ public class HomeAlumnoActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationAlumno;
     private String dniAlumno;
+    private String nombreAlumno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class HomeAlumnoActivity extends AppCompatActivity {
         });
 
         dniAlumno = getIntent().getStringExtra("dni-usuario");
+        nombreAlumno = getIntent().getStringExtra("nombre_usuario");
         if (dniAlumno == null) {
             dniAlumno = "";
             Toast.makeText(this, "DNI no recibido", Toast.LENGTH_SHORT).show();
@@ -48,6 +50,7 @@ public class HomeAlumnoActivity extends AppCompatActivity {
             } else if (id == R.id.nav_asientos) {
                 Intent intent = new Intent(this, AsistenciaAlumnoActivity.class);
                 intent.putExtra("dni-alumno", dniAlumno);
+                intent.putExtra("nombre-alumno", nombreAlumno);
                 startActivity(intent);
                 return true;
             }else if (id == R.id.nav_perfil_alumno) {

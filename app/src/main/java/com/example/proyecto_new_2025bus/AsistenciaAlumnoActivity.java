@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,6 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +27,8 @@ public class AsistenciaAlumnoActivity extends AppCompatActivity {
     private GridLayout gridLayout;
     private final int totalAsientos = 20;
     private FirebaseFirestore db;
+    private String nombreActual = "";
+    private final String fechaActual = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +37,31 @@ public class AsistenciaAlumnoActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         gridLayout = findViewById(R.id.gridAsientos);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationAlumno);
+        bottomNavigationView.setSelectedItemId(R.id.nav_asientos);
 
-        // Obtener DNI del alumno actual desde Intent
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if (id == R.id.nav_rutas) {
+                return true;
+            } else if (id == R.id.nav_ubicacion) {
+                startActivity(new Intent(this, estudiante.class));
+                return true;
+            } else if (id == R.id.nav_asientos) {
+                return true;
+            }else if (id == R.id.nav_perfil_alumno) {
+                return true;
+            }
+            return false;
+        });
         final String dniActual = getIntent().getStringExtra("dni-alumno");
+        nombreActual = getIntent().getStringExtra("nombre-alumno");
         if (dniActual == null) {
             Toast.makeText(this, "DNI del alumno no recibido", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
-
-        // Fecha fija para demo, idealmente pasar o calcular la fecha actual
-        final String fechaActual = "2025-07-15";
 
         cargarAsientos(dniActual, fechaActual);
     }
@@ -50,19 +69,18 @@ public class AsistenciaAlumnoActivity extends AppCompatActivity {
     private void cargarAsientos(String dniActual, String fechaActual) {
         gridLayout.removeAllViews();
 
-        // Consultar reservas en Firestore para la fecha actual
         db.collection("asistencia")
                 .whereEqualTo("fecha", fechaActual)
                 .get()
                 .addOnSuccessListener(snapshot -> {
                     Map<String, String> mapaAsientos = new HashMap<>();
-                    String dniAlumnoActual = dniActual; // dni recibido en onCreate
+                    String dniAlumnoActual = dniActual;
                     String asientoReservadoPorAlumno = null;
 
-                    // Construir mapa asiento->dni y detectar el asiento del alumno actual
                     for (DocumentSnapshot doc : snapshot) {
                         String asiento = doc.getString("asiento");
                         String dniDoc = doc.getString("dni");
+                        Log.d("FIREBASE_ASIENTO", "Asiento: " + asiento + " - DNI: " + dniDoc);
                         if (asiento != null && dniDoc != null) {
                             mapaAsientos.put(asiento, dniDoc);
                             if (dniAlumnoActual.equals(dniDoc)) {
@@ -75,7 +93,7 @@ public class AsistenciaAlumnoActivity extends AppCompatActivity {
                     int totalColumnas = 6;
                     int contadorAsiento = 1;
 
-                    gridLayout.removeAllViews(); // limpiar
+                    gridLayout.removeAllViews();
 
                     outer:
                     for (int fila = 0; fila < totalFilas; fila++) {
@@ -100,7 +118,6 @@ public class AsistenciaAlumnoActivity extends AppCompatActivity {
                             btn.setAllCaps(false);
                             btn.setBackgroundResource(R.drawable.bg_asiento);
 
-                            // Pintar según estado
                             if (mapaAsientos.containsKey(nombreAsiento)) {
                                 String dniReserva = mapaAsientos.get(nombreAsiento);
                                 if (dniAlumnoActual.equals(dniReserva)) {
@@ -150,7 +167,7 @@ public class AsistenciaAlumnoActivity extends AppCompatActivity {
         builder.setPositiveButton("Sí", (dialog, which) -> {
             Map<String, Object> reserva = new HashMap<>();
             reserva.put("dni", dni);
-            reserva.put("nombre", "Nombre del alumno"); // Opcional, reemplaza o pasa el nombre real
+            reserva.put("nombre", nombreActual);
             reserva.put("fecha", fecha);
             reserva.put("estado", "RESERVADO");
             reserva.put("asiento", asientoBtn.getText().toString());

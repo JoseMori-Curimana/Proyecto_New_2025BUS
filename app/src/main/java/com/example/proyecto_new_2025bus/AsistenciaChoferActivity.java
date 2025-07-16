@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,136 +17,136 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class AsistenciaChoferActivity extends AppCompatActivity {
 
     private GridLayout gridLayout;
-    private final int totalAsientos = 20;
     private FirebaseFirestore db;
+    private final int totalAsientos = 20;
+    private final String fechaActual = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asistencia_chofer);
+
         db = FirebaseFirestore.getInstance();
-
         gridLayout = findViewById(R.id.gridAsientos);
-
-        int totalFilas = 10;
-        int totalColumnas = 6;
-        int contadorAsiento = 1;
-
-        outer:
-        for (int fila = 0; fila < totalFilas; fila++) {
-            for (int columna = 0; columna < totalColumnas; columna++) {
-
-                // Columnas 2 y 3 son el pasillo vacío
-                if (columna == 2 || columna == 3) {
-                    View espacio = new View(this);
-                    GridLayout.LayoutParams espacioParams = new GridLayout.LayoutParams();
-                    espacioParams.width = 0;
-                    espacioParams.height = 160;
-                    espacioParams.columnSpec = GridLayout.spec(columna, 1f);
-                    espacioParams.rowSpec = GridLayout.spec(fila, 1);
-                    espacio.setLayoutParams(espacioParams);
-                    gridLayout.addView(espacio);
-                    continue;
-                }
-
-                // Limita a 20 asientos
-                if (contadorAsiento > totalAsientos) break outer;
-
-                // Crear botón de asiento
-                View asiento = crearAsiento(contadorAsiento++);
-                GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-                params.width = 0;
-                params.height = 160;
-                params.columnSpec = GridLayout.spec(columna, 1f);
-                params.rowSpec = GridLayout.spec(fila, 1);
-                asiento.setLayoutParams(params);
-                gridLayout.addView(asiento);
-            }
-        }
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationChofer);
-        bottomNavigationView.setSelectedItemId(R.id.nav_asientos); // marca el ítem actual
+        bottomNavigationView.setSelectedItemId(R.id.nav_asientos);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_inicio) {
                 startActivity(new Intent(this, chofer.class));
-                overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_asientos) {
-                return true; // Ya estamos aquí
+                return true;
             } else if (id == R.id.nav_historial) {
                 startActivity(new Intent(this, HistorialActivity.class));
-                overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_perfil) {
-                // Reemplaza con tu actividad de perfil si tienes una distinta
                 return true;
             }
-
             return false;
         });
+        Log.d("FIREBASE_FECHA", "Fecha:  " + fechaActual);
+        cargarAsientos();
+    }
 
-        db.collection("usuarios")
+    private void cargarAsientos() {
+        gridLayout.removeAllViews();
+
+        db.collection("asistencia")
+                .whereEqualTo("fecha", fechaActual)
                 .get()
-                .addOnSuccessListener(querySnapshot -> {
-                    if (!querySnapshot.isEmpty()) {
-                        DocumentSnapshot document = querySnapshot.getDocuments().get(0);
-                        String rol = document.getString("rol");
-                        String nombre = document.getString("nombre");
+                .addOnSuccessListener(snapshot -> {
+                    Map<String, DocumentSnapshot> mapaAsistencia = new HashMap<>();
 
-                        Intent intent;
-
-                        if ("chofer".equalsIgnoreCase(rol)) {
-
-                        } else if ("alumno".equalsIgnoreCase(rol)) {
-
-                        } else {
-                            Toast.makeText(this, "Usuario no existe o no autorizado", Toast.LENGTH_SHORT).show();
-                            return;
+                    for (DocumentSnapshot doc : snapshot) {
+                        String asiento = doc.getString("asiento");
+                        if (asiento != null) {
+                            mapaAsistencia.put(asiento, doc);
                         }
-
-                    } else {
-                        Toast.makeText(this, "Código o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                     }
+
+                    int totalFilas = 10;
+                    int totalColumnas = 6;
+                    int contador = 1;
+
+                    outer:
+                    for (int fila = 0; fila < totalFilas; fila++) {
+                        for (int columna = 0; columna < totalColumnas; columna++) {
+                            if (columna == 2 || columna == 3) {
+                                View espacio = new View(this);
+                                GridLayout.LayoutParams espacioParams = new GridLayout.LayoutParams();
+                                espacioParams.width = 0;
+                                espacioParams.height = 160;
+                                espacioParams.columnSpec = GridLayout.spec(columna, 1f);
+                                espacioParams.rowSpec = GridLayout.spec(fila, 1);
+                                espacio.setLayoutParams(espacioParams);
+                                gridLayout.addView(espacio);
+                                continue;
+                            }
+
+                            if (contador > totalAsientos) break outer;
+
+                            String nombreAsiento = "A" + contador;
+                            Button btn = new Button(this);
+                            btn.setText(nombreAsiento);
+                            btn.setTextColor(Color.BLACK);
+                            btn.setAllCaps(false);
+                            btn.setBackgroundResource(R.drawable.bg_asiento);
+
+                            DocumentSnapshot doc = mapaAsistencia.get(nombreAsiento);
+                            if (doc != null) {
+                                String estado = doc.getString("estado");
+                                if ("ASISTIÓ".equalsIgnoreCase(estado)) {
+                                    btn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#4CAF50"))); // Verde
+                                } else if ("AUSENTE".equalsIgnoreCase(estado)) {
+                                    btn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F44336"))); // Rojo
+                                } else {
+                                    btn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFEB3B"))); // Amarillo
+                                }
+
+                                btn.setOnClickListener(v -> mostrarDialogoEstado(btn, doc.getId()));
+                            } else {
+                                btn.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
+                                btn.setEnabled(false);
+                            }
+
+                            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+                            params.width = 0;
+                            params.height = 160;
+                            params.columnSpec = GridLayout.spec(columna, 1f);
+                            params.rowSpec = GridLayout.spec(fila, 1);
+                            btn.setLayoutParams(params);
+                            gridLayout.addView(btn);
+                            contador++;
+                        }
+                    }
+
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error al cargar los datos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Error al cargar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
-
-
     }
 
-    private View crearAsiento(int numero) {
-        Button btn = new Button(this);
-        btn.setText("A" + numero);
-        btn.setTextColor(Color.BLACK);
-        btn.setAllCaps(false);
-        btn.setBackgroundColor(Color.LTGRAY);  // Color inicial
-
-        // Si tienes un fondo personalizado en drawable, descomenta:
-        btn.setBackgroundResource(R.drawable.bg_asiento);
-
-        // Evento al hacer clic en el asiento
-        btn.setOnClickListener(v -> mostrarDialogo(btn));
-
-        return btn;
-    }
-
-    private void mostrarDialogo(Button asiento) {
+    private void mostrarDialogoEstado(Button asientoBtn, String docId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmar asistencia");
-        builder.setMessage("¿El estudiante asistió?");
+        builder.setMessage("¿El alumno asistió al asiento " + asientoBtn.getText().toString() + "?");
 
-        builder.setPositiveButton("Sí", (dialog, which) -> {
-            asiento.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#4CAF50"))); // Verde
+        builder.setPositiveButton("Sí (Asistió)", (dialog, which) -> {
+            actualizarEstado(docId, "ASISTIÓ");
         });
 
-        builder.setNegativeButton("No", (dialog, which) -> {
-            asiento.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F44336"))); // Rojo
+        builder.setNegativeButton("No (Ausente)", (dialog, which) -> {
+            actualizarEstado(docId, "AUSENTE");
         });
 
         builder.setNeutralButton("Cancelar", (dialog, which) -> dialog.dismiss());
@@ -153,5 +154,15 @@ public class AsistenciaChoferActivity extends AppCompatActivity {
         builder.show();
     }
 
-
+    private void actualizarEstado(String docId, String nuevoEstado) {
+        db.collection("asistencia").document(docId)
+                .update("estado", nuevoEstado)
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(this, "Estado actualizado a " + nuevoEstado, Toast.LENGTH_SHORT).show();
+                    cargarAsientos(); // refrescar colores
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al actualizar: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
 }

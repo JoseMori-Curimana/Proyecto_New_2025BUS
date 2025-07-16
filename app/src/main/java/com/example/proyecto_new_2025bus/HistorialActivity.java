@@ -25,7 +25,7 @@ public class HistorialActivity extends AppCompatActivity {
     private List<HistorialItem> historialItems;
     private FirebaseFirestore db;
     private String filtroEstado = "TODOS";
-    private String fechaSeleccionada = "";
+    private String fechaSeleccionada = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     private Spinner spinnerEstado;
     private TextView txtFechaSeleccionada;
 
@@ -90,12 +90,13 @@ public class HistorialActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_perfil) {
-                // Reemplaza con tu actividad de perfil si tienes una distinta
                 return true;
             }
 
             return false;
         });
+        txtFechaSeleccionada.setText("Fecha: " + fechaSeleccionada);
+        cargarDesdeFirebase();
     }
 
     private void mostrarSelectorFecha() {
