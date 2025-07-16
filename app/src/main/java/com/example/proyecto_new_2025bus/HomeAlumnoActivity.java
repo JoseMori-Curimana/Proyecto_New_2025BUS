@@ -100,6 +100,7 @@ public class HomeAlumnoActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, AsistenciaAlumnoActivity.class);
                 intent.putExtra("dni-alumno", dniAlumno);
                 intent.putExtra("nombre-alumno", nombreAlumno);
+                intent.putExtra("codigo", codigo);
                 startActivity(intent);
                 return true;
             } else if (id == R.id.nav_notificaciones) {

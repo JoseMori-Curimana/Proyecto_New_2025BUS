@@ -50,7 +50,12 @@ public class AsistenciaAlumnoActivity extends AppCompatActivity {
                 return true;
             } else if (id == R.id.nav_asientos) {
                 return true;
-            }else if (id == R.id.nav_perfil_alumno) {
+            }else if (id == R.id.nav_notificaciones) {
+                Intent intent = new Intent(this, Notificacion.class);
+                intent.putExtra("codigo", codigo); //
+                startActivity(intent);
+                return true;
+            } else if (id == R.id.nav_perfil_alumno) {
                 Intent intent = new Intent(this, PerfilAlumnoActivity.class);
                 intent.putExtra("codigo", codigo); //
                 startActivity(intent);

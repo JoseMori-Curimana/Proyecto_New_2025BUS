@@ -79,7 +79,7 @@ public class HistorialActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_inicio) {
-                startActivity(new Intent(this, chofer.class));
+                startActivity(new Intent(this, Chofer.class));
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_asientos) {

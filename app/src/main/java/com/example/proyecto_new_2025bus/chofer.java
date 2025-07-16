@@ -35,7 +35,7 @@ import java.util.Locale;
 import java.util.HashMap;
 import java.util.Map;
 
-public class chofer extends AppCompatActivity implements OnMapReadyCallback {
+public class Chofer extends AppCompatActivity implements OnMapReadyCallback {
 
     private Spinner spinnerRuta, spinnerViaje;
     private Button btnIniciar;
