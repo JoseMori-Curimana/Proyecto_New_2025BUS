@@ -41,9 +41,7 @@ public class HomeAlumnoActivity extends AppCompatActivity {
 
         bottomNavigationAlumno.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-
             if (id == R.id.nav_rutas) {
-//
                 return true;
             } else if (id == R.id.nav_ubicacion) {
                 startActivity(new Intent(this, estudiante.class));
@@ -59,8 +57,10 @@ public class HomeAlumnoActivity extends AppCompatActivity {
                 intent.putExtra("codigo", codigo); //
                 startActivity(intent);
                 return true;
+            }else if(id == R.id.nav_notificaciones){
+                startActivity(new Intent(this, Notificacion.class));
+                return true;
             }
-
             return false;
         });
     }
