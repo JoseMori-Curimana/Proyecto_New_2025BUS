@@ -23,7 +23,7 @@ public class RegistrarChoferActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registrar_chofer1);
+        setContentView(R.layout.activity_registrar_chofer);
 
         // Inicializar Firestore
         db = FirebaseFirestore.getInstance();

@@ -79,6 +79,8 @@
             android:id="@+id/btnRegistrarChofer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registrar Chofer" />
+            android:text="Registrar Chofer"
+         android:textColor="#FFFFFF"
+        android:backgroundTint="#4CAF50"/>
     </LinearLayout>
 </ScrollView>
